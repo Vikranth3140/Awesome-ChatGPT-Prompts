@@ -7,14 +7,14 @@ def load_chatgpt_prompts():
     return load_dataset('fka/awesome-chatgpt-prompts')['train']['prompt']
 
 def get_user_input(prompts, names):
-    print("Choose a prompt number from 0 to", len(prompts) - 1)
-    for idx, prompt in enumerate(names):
-        print(f"{idx}: {names}")
+    print("Choose a prompt number from 1 to", len(prompts))
+    for idx, name in enumerate(names):
+        print(f"{idx + 1}: {name}")
     prompt_number = int(input("Enter the prompt number: "))
-    if prompt_number < 0 or prompt_number >= len(prompts):
+    if prompt_number < 1 or prompt_number > len(prompts):
         print("Invalid prompt number. Please try again.")
-        return get_user_input(prompts)
-    return prompts[prompt_number]
+        return get_user_input(prompts, names)
+    return prompts[prompt_number - 1]
 
 def main():
     prompts = load_chatgpt_prompts()
